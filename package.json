@@ -1,0 +1,16 @@
+{
+  "name": "uz-monitor",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "start": "cucumber-js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "chromedriver": "^2.25.3",
+    "cucumber": "^2.0.0-rc.2",
+    "selenium-webdriver": "^3.0.1"
+  }
+}
