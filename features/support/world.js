@@ -1,10 +1,11 @@
 require('chromedriver');
+require('phantomjs-prebuilt');
 var seleniumWebdriver = require('selenium-webdriver');
 var fs = require('fs');
 
 function CustomWorld() {
     var driver = new seleniumWebdriver.Builder()
-        .forBrowser('chrome')
+        .forBrowser('phantomjs')
         .build();
 
   this.driver = driver;
