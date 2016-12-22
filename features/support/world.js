@@ -4,6 +4,7 @@ let seleniumWebdriver = require('selenium-webdriver');
 let fs = require('fs-extra');
 let path = require('path');
 let screenshotDir = require('../../config').screenshotDir;
+let {defineSupportCode} = require('cucumber');
 
 function getScreenshotFilename() {
     return path.join(screenshotDir, 'screenshot-' + new Date().getTime() + '.png')
@@ -26,6 +27,6 @@ function CustomWorld() {
     };
 }
 
-module.exports = function () {
-    this.World = CustomWorld;
-};
+defineSupportCode(function({setWorldConstructor}) {
+    setWorldConstructor(CustomWorld)
+});

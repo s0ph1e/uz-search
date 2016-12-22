@@ -1,3 +1,4 @@
+let {defineSupportCode} = require('cucumber');
 let nodemailer = require('nodemailer');
 let config = require('../../config');
 let transporter = nodemailer.createTransport(config.mail);
@@ -17,10 +18,11 @@ function sendNotification(scenarioResult, screenshots) {
     if (scenarioResult.status === 'passed' && config.notificationsEnabled.includes('mail')) {
         return sendMail(screenshots);
     }
+    return Promise.resolve();
 }
 
-module.exports = function () {
-    this.After(function (scenarioResult) {
+defineSupportCode(function({After}) {
+    After(function (scenarioResult) {
         return sendNotification(scenarioResult, this.screenshots);
     });
-};
+});
