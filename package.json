@@ -1,12 +1,17 @@
 {
-  "name": "uz-monitor",
+  "name": "uz-search",
   "version": "1.0.0",
-  "description": "",
+  "description": "Search tickets on UZ booking site",
+  "readmeFilename": "README.md",
   "scripts": {
     "start": "cucumber-js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/s0ph1e/uz-search.git"
+  },
+  "author": "s0ph1e",
   "license": "MIT",
   "dependencies": {
     "chromedriver": "^2.25.3",
