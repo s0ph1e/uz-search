@@ -11,7 +11,7 @@ function sendMail(attachments) {
         text: 'UZ booking: tickets found! See attached screenshots',
         attachments: attachments.map((attachment) => ({path: attachment}))
     };
-    return transporter.sendMail(mailOptions).then(console.log);
+    return transporter.sendMail(mailOptions).then(console.log).catch(console.error);
 }
 
 function sendNotification(scenarioResult, screenshots) {
@@ -22,7 +22,7 @@ function sendNotification(scenarioResult, screenshots) {
 }
 
 defineSupportCode(function({After}) {
-    After(function (scenarioResult) {
+    After({timeout: 20 * 1000}, function (scenarioResult) {
         return sendNotification(scenarioResult, this.screenshots);
     });
 });

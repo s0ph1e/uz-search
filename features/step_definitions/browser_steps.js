@@ -9,41 +9,51 @@ defineSupportCode(function({Given, When, Then}) {
     });
 
     When(/^I choose departure station (.*)$/, function (station) {
-        return this.driver.findElement(By.id('station_from')).then((element) => {
-            return element.findElement(By.name('station_from')).sendKeys(station).then(() => {
-                return element.findElement(By.id('stations_from')).then((dropdownElement) => {
-                    return this.driver.wait(until.elementIsVisible(dropdownElement), 1000).findElement(By.tagName('div')).click();
+        return this.driver.findElement(By.className('search-block')).then((element) => {
+            return element.findElement(By.name('from-title')).sendKeys(station).then(() => {
+                return element.findElement(By.id('ui-id-1')).then((dropdownElement) => {
+                    return this.driver.wait(until.elementIsVisible(dropdownElement), 2000).findElement(By.tagName('li')).click();
                 })
             })
-        })
+        });
     });
 
     When(/^I choose arrival station (.*)$/, function (station) {
-        return this.driver.findElement(By.id('station_till')).then((element) => {
-            return element.findElement(By.name('station_till')).sendKeys(station).then(() => {
-                return element.findElement(By.id('stations_till')).then((dropdownElement) => {
-                    return this.driver.wait(until.elementIsVisible(dropdownElement), 1000).findElement(By.tagName('div')).click();
+        return this.driver.findElement(By.className('search-block')).then((element) => {
+            return element.findElement(By.name('to-title')).sendKeys(station).then(() => {
+                return element.findElement(By.id('ui-id-2')).then((dropdownElement) => {
+                    return this.driver.wait(until.elementIsVisible(dropdownElement), 2000).findElement(By.tagName('li')).click();
                 })
             })
         })
     });
 
     When(/^I choose date (.*)$/, function (date) {
-        return this.driver.executeScript('document.getElementById("date_dep").setAttribute("value", "' + date + '")');
+        return this.driver.executeScript('document.getElementsByName("date")[0].setAttribute("value", "' + date + '")');
     });
 
     When(/^I do search$/, function () {
-        return this.driver.findElement(By.name('search')).click();
+        let xpath = "//div[contains(@class, 'button')]/div/button[contains(text(), 'Поиск')]";
+        return this.driver.findElement(By.xpath(xpath)).click();
     });
 
     Then(/^I should see available trains$/, function () {
-        return this.driver.findElement(By.id('ts_res')).then((resultTableElement) => {
-            return this.driver.wait(until.elementIsVisible(resultTableElement), 5000).then(this.saveScreenshot);
-        });
+        return this.driver.wait(until.elementLocated({className: 'train-table'}), 5000).then(element => {
+            return this.driver.wait(until.elementIsVisible(element))
+        }).then(this.saveScreenshot);
     });
 
     Then(/^I should see available train (.*)$/, function (number) {
-        let xpath = "//td[contains(@class, 'num')]/a[contains(text(),'" + number + "')]";
-        return this.driver.wait(until.elementLocated({xpath: xpath}), 5000).then(this.saveScreenshot);
+        let xpath = "//td[contains(@class, 'num')]/div[contains(text(),'" + number + "')]";
+        return this.driver.wait(until.elementLocated({xpath: xpath}), 5000).then(element => {
+            return this.driver.wait(until.elementIsVisible(element))
+        }).then(this.saveScreenshot);
+    });
+
+    Then(/^I should see available places of type (.*)$/, function (type) {
+        let xpath = "//td[contains(@class, 'place')]/div/span[contains(text(), " + type + ")]";
+        return this.driver.wait(until.elementLocated({xpath: xpath}), 5000).then(element => {
+            return this.driver.wait(until.elementIsVisible(element))
+        }).then(this.saveScreenshot);
     });
 });

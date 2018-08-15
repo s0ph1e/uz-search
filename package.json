@@ -14,7 +14,7 @@
   "author": "s0ph1e",
   "license": "MIT",
   "dependencies": {
-    "chromedriver": "^2.25.3",
+    "chromedriver": "^2.41.0",
     "cucumber": "^2.0.0-rc.5",
     "fs-extra": "^1.0.0",
     "nodemailer": "^2.7.0",
