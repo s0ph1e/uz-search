@@ -11,8 +11,18 @@ function getScreenshotFilename() {
 }
 
 function CustomWorld() {
+
+    var chromeCapabilities = seleniumWebdriver.Capabilities.chrome();
+    //setting chrome options to start the browser fully maximized
+    var chromeOptions = {
+        'args': ['--disable-dev-shm-usage', '--disable-software-rasterizer', '--disable-gpu', '--headless', '--no-sandbox']
+    };
+    chromeCapabilities.set('chromeOptions', chromeOptions);
+
     this.driver = new seleniumWebdriver.Builder()
-        .forBrowser('phantomjs')
+//        .forBrowser('chrome')
+//        .setChromeOptions({args: ['--no-sandbox']})
+        .withCapabilities(chromeCapabilities)
         .build();
     this.screenshots = [];
 
@@ -27,6 +37,7 @@ function CustomWorld() {
     };
 }
 
-defineSupportCode(function({setWorldConstructor}) {
+defineSupportCode(function({setWorldConstructor, setDefaultTimeout}) {
+    setDefaultTimeout(10*1000)
     setWorldConstructor(CustomWorld)
 });
