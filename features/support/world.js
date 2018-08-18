@@ -25,6 +25,7 @@ function CustomWorld() {
         .withCapabilities(chromeCapabilities)
         .build();
     this.screenshots = [];
+    this.url = null;
 
     this.saveScreenshot = (element) => {
         return this.driver.executeScript('arguments[0].scrollIntoView(true)', element).then(() => {
@@ -35,6 +36,12 @@ function CustomWorld() {
             })
         });
     };
+
+    this.saveUrl = () => {
+        return this.driver.getCurrentUrl().then((url) => {
+            this.url = url;
+        });
+    }
 }
 
 defineSupportCode(function({setWorldConstructor, setDefaultTimeout}) {

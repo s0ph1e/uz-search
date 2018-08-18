@@ -14,7 +14,7 @@ If tickets found - sends email with screenshot
 
 
 ### Install
-* install nodejs 6
+* install nodejs 8
 * `npm i`
 * `npm start`
 

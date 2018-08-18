@@ -40,20 +40,20 @@ defineSupportCode(function({Given, When, Then}) {
     Then(/^I should see available trains$/, function () {
         return this.driver.wait(until.elementLocated({className: 'train-table'}), 5000).then(element => {
             return this.driver.wait(until.elementIsVisible(element))
-        }).then(this.saveScreenshot);
+        }).then(this.saveScreenshot).then(this.saveUrl);
     });
 
     Then(/^I should see available train (.*)$/, function (number) {
         let xpath = "//td[contains(@class, 'num')]/div[contains(text(),'" + number + "')]";
         return this.driver.wait(until.elementLocated({xpath: xpath}), 5000).then(element => {
             return this.driver.wait(until.elementIsVisible(element))
-        }).then(this.saveScreenshot);
+        }).then(this.saveScreenshot).then(this.saveUrl);
     });
 
     Then(/^I should see available places of type (.*)$/, function (type) {
         let xpath = "//td[contains(@class, 'place')]/div/span[contains(text(), " + type + ")]";
         return this.driver.wait(until.elementLocated({xpath: xpath}), 5000).then(element => {
             return this.driver.wait(until.elementIsVisible(element))
-        }).then(this.saveScreenshot);
+        }).then(this.saveScreenshot).then(this.saveUrl);
     });
 });
