@@ -17,6 +17,7 @@
     "chromedriver": "^2.41.0",
     "cucumber": "^2.0.0-rc.5",
     "fs-extra": "^1.0.0",
+    "node-telegram-bot-api": "^0.30.0",
     "nodemailer": "^2.7.0",
     "phantomjs-prebuilt": "^2.1.16",
     "selenium-webdriver": "^3.0.1"
