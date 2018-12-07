@@ -51,7 +51,7 @@ defineSupportCode(function({Given, When, Then}) {
     });
 
     Then(/^I should see available places of type (.*)$/, function (type) {
-        let xpath = "//td[contains(@class, 'place')]/div/span[contains(text(), " + type + ")]";
+        let xpath = "//td[contains(@class, 'place')]/div/span[contains(text(), '" + type + "')]";
         return this.driver.wait(until.elementLocated({xpath: xpath}), 5000).then(element => {
             return this.driver.wait(until.elementIsVisible(element))
         }).then(this.saveScreenshot).then(this.saveUrl);
